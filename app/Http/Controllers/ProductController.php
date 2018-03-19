@@ -6,6 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Resources\Product\ProductCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Model\Product;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -95,7 +96,7 @@ class ProductController extends Controller
         $product->update($request->all());
         return response([
             'data' => new ProductResource($product)
-        ],200);
+        ],Response::HTTP_OK);
     }
 
     /**
@@ -106,6 +107,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return response(null,Response::HTTP_NO_CONTENT);
+
     }
 }
