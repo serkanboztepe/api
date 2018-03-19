@@ -48,7 +48,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        return false;
+        return new ReviewResource(Review::find($review->id));
     }
 
     /**
